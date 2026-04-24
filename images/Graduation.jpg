@@ -1,1 +1,14 @@
-placeholder
+# Navigate to your repository directory
+cd /path/to/your/Personal-Website
+
+# Copy your new image to replace the old one
+cp "/mnt/user-data/Desktop/life&travel/Graduation.jpg" images/Graduation.jpg
+
+# Stage the change
+git add images/Graduation.jpg
+
+# Commit with a message
+git commit -m "Update Graduation.jpg"
+
+# Push to GitHub
+git push origin main
