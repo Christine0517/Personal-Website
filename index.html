@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xilin Christine Huang</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--lav:#c8b8d8;--lav-l:#ede6f4;--lav-d:#8b6fa8;--orange:#d4845a;--peach:#e8c5a8;--cream:#faf7f4;--tm:#2c2438;--ts:#5a5060;--tl:#9a8fa8}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--tm);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3rem;background:rgba(250,247,244,.9);backdrop-filter:blur(14px);border-bottom:.5px solid rgba(200,184,216,.3)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;letter-spacing:.08em;color:var(--tm)}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul li a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ts);text-decoration:none;transition:color .3s}
+nav ul li a:hover{color:var(--lav-d)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--tm)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(250,247,244,.97);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--tm);text-decoration:none}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ts)}
+@media(max-width:680px){nav{padding:1rem 1.5rem}nav ul{display:none}.hamburger{display:flex}}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#2d1f3d 0%,#4a3860 20%,#7a5c8a 45%,#c4855e 75%,#e8a87c 100%)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,18,42,.92) 0%,rgba(28,18,42,.3) 50%,transparent 100%)}
+.hero-leaves{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.leaf{position:absolute;opacity:0;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:0}10%{opacity:.7}90%{opacity:.3}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.hero-content{position:relative;z-index:2;padding:0 3rem 4rem;max-width:700px}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-bottom:1rem;opacity:0;animation:fadeUp 1s ease .3s forwards}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:300;line-height:1.05;color:#fff;opacity:0;animation:fadeUp 1s ease .5s forwards}
+.hero h1 em{font-style:italic;color:var(--peach)}
+.hero-tagline{margin-top:1.2rem;font-size:1rem;color:rgba(255,255,255,.65);font-weight:300;line-height:1.7;max-width:420px;opacity:0;animation:fadeUp 1s ease .8s forwards}
+.hero-cta{display:inline-flex;gap:1rem;margin-top:2rem;opacity:0;animation:fadeUp 1s ease 1s forwards;flex-wrap:wrap}
+.btn-o{padding:.7rem 1.8rem;border:1px solid rgba(200,184,216,.6);color:#fff;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .3s;cursor:pointer;background:transparent}
+.btn-o:hover{background:rgba(200,184,216,.2)}
+.btn-f{padding:.7rem 1.8rem;background:var(--lav-d);color:#fff;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
+.btn-f:hover{background:#7a5fa0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.scroll-hint{position:absolute;bottom:2rem;right:3rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeUp 1s ease 1.4s forwards}
+.scroll-hint span{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,.2);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--peach);animation:sd 1.5s ease infinite}
+@keyframes sd{to{top:200%}}
+@media(max-width:680px){.hero-content{padding:0 1.5rem 3rem}}
+
+/* SECTIONS */
+section{padding:6rem 3rem}
+.section-label{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--lav-d);margin-bottom:.5rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;color:var(--tm);margin-bottom:3rem}
+.divider{width:48px;height:1px;background:linear-gradient(to right,var(--lav-d),transparent);margin:1rem 0 2rem}
+@media(max-width:680px){section{padding:4rem 1.5rem}}
+
+/* ABOUT */
+.about{background:var(--cream);min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;max-width:1000px}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;gap:2.5rem}}
+.about-photo-wrap{position:relative}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;filter:sepia(6%) contrast(1.04)}
+.about-frame{position:absolute;inset:-10px;border:.5px solid rgba(200,184,216,.4);pointer-events:none;z-index:-1}
+.photo-caption{margin-top:.7rem;font-size:.72rem;letter-spacing:.1em;color:var(--tl);font-style:italic}
+.about-text p{font-size:1rem;line-height:1.85;color:var(--ts);margin-bottom:1.4rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+.tag{padding:.35rem 1rem;border:.5px solid var(--lav);font-size:.75rem;color:var(--lav-d);letter-spacing:.06em}
+.locations-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.loc-badge{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--tl);padding:.3rem .8rem;background:var(--lav-l)}
+.loc-dot{width:5px;height:5px;border-radius:50%;background:var(--lav-d);flex-shrink:0}
+
+/* EXPERIENCE */
+.experience{background:#f3eff8;min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.bubbles-canvas{position:absolute;inset:0;pointer-events:none;z-index:1}
+.exp-list{max-width:650px;width:100%;position:relative;z-index:2}
+.exp-item{display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:.5px solid rgba(200,184,216,.35)}
+.exp-item:first-child{padding-top:0}
+.exp-date{font-size:.72rem;color:var(--tl);letter-spacing:.04em;padding-top:4px;line-height:1.6}
+.exp-role{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--tm);margin-bottom:.2rem}
+.exp-company{font-size:.75rem;letter-spacing:.08em;color:var(--lav-d);margin-bottom:.7rem;text-transform:uppercase}
+.exp-desc{font-size:.88rem;line-height:1.75;color:var(--ts)}
+
+/* PROJECTS */
+.projects{background:var(--cream);min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px}
+.proj-card{padding:2rem;border:.5px solid rgba(200,184,216,.5);background:#fff;transition:transform .3s,box-shadow .3s;cursor:default}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(139,111,168,.12)}
+.proj-tag{display:inline-block;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--tm);margin-bottom:.8rem}
+.proj-desc{font-size:.87rem;line-height:1.75;color:var(--ts)}
+
+/* SKILLS — static grid */
+.skills{background:#2c2438;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.skills .section-label{color:var(--peach)}
+.skills .section-title{color:#f0eaf8}
+.skills .divider{background:linear-gradient(to right,var(--peach),transparent)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2.5rem;max-width:1000px}
+.skill-group-title{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--peach);margin-bottom:1rem;opacity:.8}
+.skill-pills{display:flex;flex-direction:column;gap:.5rem}
+.sk{display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem;border:.5px solid rgba(200,184,216,.18);font-size:.85rem;color:rgba(240,234,248,.8);letter-spacing:.02em;transition:background .2s,border-color .2s;cursor:default}
+.sk:hover{background:rgba(200,184,216,.1);border-color:rgba(200,184,216,.4);color:#f0eaf8}
+.sk-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BEYOND */
+.beyond{background:var(--cream);min-height:100vh;position:relative;overflow:hidden;padding:0}
+.beyond-sky{position:absolute;inset:0;background:linear-gradient(160deg,#e0d5ef 0%,#ece5f5 30%,#f5f1fa 65%,#faf7f4 100%)}
+.beyond-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:10;pointer-events:none}
+.beyond-center .section-label{color:var(--lav-d);margin-bottom:.4rem}
+.beyond-main{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:300;line-height:1.1;color:var(--tm);white-space:nowrap}
+.beyond-main em{font-style:italic;color:var(--lav-d)}
+.cloud{position:absolute;z-index:5;display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:default}
+.cloud:hover .cloud-body{transform:translateY(-5px);box-shadow:0 14px 35px rgba(139,111,168,.22)}
+.cloud-body{padding:1.4rem 2rem;background:rgba(255,255,255,.9);border:.5px solid rgba(200,184,216,.6);border-radius:70px;box-shadow:0 6px 24px rgba(139,111,168,.12);display:flex;flex-direction:column;align-items:center;gap:.45rem;transition:all .3s;position:relative;min-width:160px}
+.cloud-body::after{content:'';position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:13px solid rgba(255,255,255,.9)}
+.cloud-icon{font-size:2rem;line-height:1}
+.cloud-name{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lav-d);font-weight:500;white-space:nowrap}
+.cloud-sub{font-size:.75rem;color:var(--tl);text-align:center;max-width:140px;line-height:1.4}
+@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-14px)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-7px,-11px)}}
+@keyframes f3{0%,100%{transform:translate(0,-5px)}50%{transform:translate(6px,9px)}}
+@keyframes f4{0%,100%{transform:translate(0,0)}50%{transform:translate(-5px,-16px)}}
+@keyframes f5{0%,100%{transform:translate(0,-7px)}50%{transform:translate(7px,7px)}}
+@keyframes f6{0%,100%{transform:translate(0,2px)}50%{transform:translate(-6px,-10px)}}
+@keyframes f7{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-13px)}}
+
+/* CONTACT */
+.contact{background:var(--tm);min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:6rem 3rem}
+.contact::before{content:'';position:absolute;bottom:-150px;right:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(139,111,168,.18),transparent 70%);pointer-events:none}
+.contact::after{content:'';position:absolute;top:-100px;left:-100px;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(212,132,90,.08),transparent 70%);pointer-events:none}
+.contact .section-label{color:var(--peach)}
+.contact .divider{background:linear-gradient(to right,var(--peach),transparent)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1000px;position:relative;z-index:1}
+@media(max-width:720px){.contact-grid{grid-template-columns:1fr;gap:3rem}}
+.contact-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;color:#f0eaf8;margin-bottom:1.5rem}
+.contact-left h2 em{font-style:italic;color:var(--peach)}
+.contact-intro{font-size:1rem;line-height:1.85;color:rgba(240,234,248,.6);max-width:380px}
+.contact-links{display:flex;flex-direction:column;gap:1rem}
+.contact-link{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;border:.5px solid rgba(200,184,216,.2);text-decoration:none;color:#f0eaf8;transition:all .3s}
+.contact-link:hover{background:rgba(200,184,216,.1);border-color:rgba(200,184,216,.5);transform:translateX(4px)}
+.clabel{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,184,216,.5);margin-bottom:.3rem}
+.cval{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#f0eaf8}
+.carrow{color:var(--lav);font-size:1.1rem;flex-shrink:0}
+.contact-note{margin-top:1.5rem;padding:1.2rem 1.4rem;border:.5px solid rgba(200,184,216,.15);background:rgba(200,184,216,.05)}
+.contact-note p{font-size:.82rem;line-height:1.75;color:rgba(240,234,248,.5)}
+.contact-note strong{color:var(--peach);font-weight:500}
+
+footer{padding:1.8rem 3rem;border-top:.5px solid rgba(200,184,216,.12);display:flex;justify-content:space-between;align-items:center;background:var(--tm);flex-wrap:wrap;gap:.5rem;position:relative;z-index:1}
+footer p{font-size:.73rem;color:rgba(200,184,216,.35);letter-spacing:.05em}
+@media(max-width:680px){footer{padding:1.5rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Xilin Christine Huang</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#beyond">Life</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="menuBtn"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu">✕</button>
+  <a href="#about" onclick="closeMM()">About</a>
+  <a href="#experience" onclick="closeMM()">Experience</a>
+  <a href="#projects" onclick="closeMM()">Projects</a>
+  <a href="#skills" onclick="closeMM()">Skills</a>
+  <a href="#beyond" onclick="closeMM()">Life</a>
+  <a href="#contact" onclick="closeMM()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-leaves" id="leaves"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Hong Kong · Marketing × Finance</p>
+    <h1>Xilin<br><em>Christine</em><br>Huang</h1>
+    <p class="hero-tagline">MSc Marketing candidate at HKU. Finance graduate. Curious explorer of ideas, markets, and new cities.</p>
+    <div class="hero-cta">
+      <a href="#about" class="btn-o">About me</a>
+      <a href="#contact" class="btn-f">Get in touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <p class="section-label">01 — About</p>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <!--
+        TO ADD YOUR PHOTO:
+        1. Place your photo file in the same folder as this HTML file
+        2. Rename it to: graduation.jpg
+        3. The image will appear automatically
+
+        OR replace "graduation.jpg" below with a full URL from imgbb.com or similar.
+
+        The AI-generated double-exposure artwork (ChatGPT_Image_Apr_28) also looks stunning here!
+      -->
+      <img src="graduation.jpg" alt="Christine — Monash Graduation" class="about-photo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div style="display:none;width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#3d2a55,#6b4d8a 50%,#d4a88a);align-items:center;justify-content:center;flex-direction:column;gap:1rem">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:4rem;color:rgba(255,255,255,.8);letter-spacing:.1em">XCH</span>
+        <span style="font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.45)">Xilin Christine Huang</span>
+      </div>
+      <div class="about-frame"></div>
+      <p class="photo-caption">Monash University · Graduation 2025</p>
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">A finance mind<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic">with a creative eye</em></h2>
+      <p>Hi, I'm Christine — a dual-degree Finance graduate from Monash University and South China Agricultural University, now pursuing my MSc in Marketing at The University of Hong Kong.</p>
+      <p>I'm drawn to the intersection of data and storytelling — where numbers meet human behaviour. Whether building investment proposals, crafting digital campaigns, or researching new markets, I bring curiosity and care to everything I do.</p>
+      <p>Off the clock, you'll find me chasing golden hour light with my camera, exploring a city I've never been to, or slowly perfecting a flat white.</p>
+      <div class="locations-row">
+        <span class="loc-badge"><span class="loc-dot"></span>Hong Kong</span>
+        <span class="loc-badge"><span class="loc-dot"></span>Melbourne</span>
+        <span class="loc-badge"><span class="loc-dot"></span>Guangzhou</span>
+        <span class="loc-badge"><span class="loc-dot"></span>London (LSE)</span>
+      </div>
+      <div class="about-tags">
+        <span class="tag">Marketing Strategy</span>
+        <span class="tag">Finance</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Client Advisory</span>
+        <span class="tag">Digital Campaigns</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <canvas class="bubbles-canvas" id="bubblesCanvas"></canvas>
+  <p class="section-label">02 — Experience</p>
+  <div class="divider"></div>
+  <h2 class="section-title">Where I've<br>worked</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date">Apr – Jul 2025</div>
+      <div>
+        <p class="exp-role">Account Manager</p>
+        <p class="exp-company">Trademax Global Markets (TMGM) · Melbourne, Australia</p>
+        <p class="exp-desc">Supported onboarding for 50+ clients and managed 300+ client communications. Coordinated promotional activities and maintained organised client records with strong attention to detail.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Dec 2024 – Feb 2025</div>
+      <div>
+        <p class="exp-role">Investment Consulting Assistant</p>
+        <p class="exp-company">China Galaxy Securities · Guangdong Branch</p>
+        <p class="exp-desc">Developed tailored investment proposals for high-net-worth clients, improving satisfaction by 15%. Conducted industry research and market trend analysis to support client recommendations.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Nov 2023 – Jan 2024</div>
+      <div>
+        <p class="exp-role">Corporate Business Assistant</p>
+        <p class="exp-company">Agricultural Bank of China · Guangzhou</p>
+        <p class="exp-desc">Coordinated across credit and risk teams to shorten loan approval cycles. Reviewed corporate credit files and communication strategies, reducing bad debt risk.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">May 2022 – Jun 2023</div>
+      <div>
+        <p class="exp-role">Campus Engagement & Communication Support</p>
+        <p class="exp-company">Career Guidance Center · Guangzhou</p>
+        <p class="exp-desc">Coordinated company info sessions and large-scale campus job fairs, ensuring effective event execution and stakeholder engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <p class="section-label">03 — Projects</p>
+  <div class="divider"></div>
+  <h2 class="section-title">Things I've<br>built & explored</h2>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <span class="proj-tag">Consulting · 2025</span>
+      <p class="proj-title">Flick Pest Control — Market Insights</p>
+      <p class="proj-desc">Analysed 2,000+ customer records to perform segmentation and value identification. Produced 10+ strategic recommendations on high-potential market opportunities, directly supporting campaign optimisation.</p>
+    </div>
+    <div class="proj-card">
+      <span class="proj-tag">Startup · Ongoing</span>
+      <p class="proj-title">PicDeep — Underwater Drone Photography</p>
+      <p class="proj-desc">Market & Business Strategy Lead at an underwater photography startup in ideation with HKSTP (InnoX Program). Led industry analysis and user interviews to define target personas and product requirements.</p>
+    </div>
+    <div class="proj-card">
+      <span class="proj-tag">Education · 2024</span>
+      <p class="proj-title">LSE Alternative Investment</p>
+      <p class="proj-desc">Studied LBOs, APV valuation, and IRR calculation at The London School of Economics. Applied advanced financial modelling in a globally competitive cohort.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <p class="section-label">04 — Skills</p>
+  <div class="divider"></div>
+  <h2 class="section-title">What I<br>work with</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <p class="skill-group-title">Analytics & Finance</p>
+      <div class="skill-pills">
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>Excel & Pivot Tables</span>
+        <span class="sk"><span class="sk-dot" style="background:#7a8fad"></span>Tableau</span>
+        <span class="sk"><span class="sk-dot" style="background:#a06898"></span>R Studio</span>
+        <span class="sk"><span class="sk-dot" style="background:#d4845a"></span>Bloomberg</span>
+        <span class="sk"><span class="sk-dot" style="background:#c8b8d8"></span>Qualtrics</span>
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>Financial Modelling</span>
+        <span class="sk"><span class="sk-dot" style="background:#7a8fad"></span>LBO / APV / IRR</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Marketing & Strategy</p>
+      <div class="skill-pills">
+        <span class="sk"><span class="sk-dot" style="background:#e8c5a8"></span>Digital Marketing</span>
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>Brand Strategy</span>
+        <span class="sk"><span class="sk-dot" style="background:#7a8fad"></span>Campaign Optimisation</span>
+        <span class="sk"><span class="sk-dot" style="background:#a06898"></span>Market Research</span>
+        <span class="sk"><span class="sk-dot" style="background:#d4845a"></span>Segmentation</span>
+        <span class="sk"><span class="sk-dot" style="background:#c8b8d8"></span>Go-to-Market</span>
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>XHS / WeChat / Email</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Tools & Software</p>
+      <div class="skill-pills">
+        <span class="sk"><span class="sk-dot" style="background:#e8c5a8"></span>Canva</span>
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>Google Trends</span>
+        <span class="sk"><span class="sk-dot" style="background:#7a8fad"></span>PowerPoint</span>
+        <span class="sk"><span class="sk-dot" style="background:#a06898"></span>Google Analytics</span>
+        <span class="sk"><span class="sk-dot" style="background:#d4845a"></span>Microsoft Office Suite</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Languages</p>
+      <div class="skill-pills">
+        <span class="sk"><span class="sk-dot" style="background:#c8b8d8"></span>English — Professional</span>
+        <span class="sk"><span class="sk-dot" style="background:#8b6fa8"></span>Mandarin — Native</span>
+        <span class="sk"><span class="sk-dot" style="background:#7a8fad"></span>Cantonese — Native</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND -->
+<section class="beyond" id="beyond">
+  <div class="beyond-sky"></div>
+  <div class="beyond-center">
+    <p class="section-label">05 — Beyond Work</p>
+    <h2 class="beyond-main">A life in <em>colour</em></h2>
+  </div>
+  <div class="cloud" style="top:5%;left:8%;animation:f1 5s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">📷</span><span class="cloud-name">Photography</span><span class="cloud-sub">Chasing golden hour light</span></div>
+  </div>
+  <div class="cloud" style="top:5%;right:8%;animation:f2 6s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">☕</span><span class="cloud-name">Coffee</span><span class="cloud-sub">Barista certified</span></div>
+  </div>
+  <div class="cloud" style="top:32%;left:3%;animation:f3 4.8s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">✈️</span><span class="cloud-name">Travelling</span><span class="cloud-sub">Always a new city</span></div>
+  </div>
+  <div class="cloud" style="top:32%;right:3%;animation:f4 5.5s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">🎵</span><span class="cloud-name">Concerts</span><span class="cloud-sub">Live music moments</span></div>
+  </div>
+  <div class="cloud" style="bottom:6%;left:8%;animation:f5 6.2s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">🎾</span><span class="cloud-name">Tennis & Golf</span><span class="cloud-sub">Beginner with passion</span></div>
+  </div>
+  <div class="cloud" style="bottom:6%;right:8%;animation:f6 5.8s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">🌅</span><span class="cloud-name">Sunset & Blue Hour</span><span class="cloud-sub">My favourite light</span></div>
+  </div>
+  <div class="cloud" style="bottom:30%;left:50%;transform:translateX(-50%);animation:f7 5.2s ease-in-out infinite">
+    <div class="cloud-body"><span class="cloud-icon">🌍</span><span class="cloud-name">Exploring</span><span class="cloud-sub">Kyoto · Fiji · Melbourne · London</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">06 — Contact</p>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <h2>Let's<br><em>connect</em></h2>
+      <p class="contact-intro">I'm currently open to opportunities in marketing strategy, brand management, and finance. Whether you'd like to collaborate, hire, or simply say hello — I'd love to hear from you.</p>
+    </div>
+    <div>
+      <div class="contact-links">
+        <a href="mailto:xilinhuang.1005@outlook.com" class="contact-link">
+          <div><p class="clabel">Email</p><p class="cval">xilinhuang.1005@outlook.com</p></div>
+          <span class="carrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/xilin-huang0517" target="_blank" class="contact-link">
+          <div><p class="clabel">LinkedIn</p><p class="cval">xilin-huang0517</p></div>
+          <span class="carrow">→</span>
+        </a>
+        <a href="tel:+85270517043" class="contact-link">
+          <div><p class="clabel">Phone</p><p class="cval">+852 7051 7043</p></div>
+          <span class="carrow">→</span>
+        </a>
+      </div>
+      <div class="contact-note">
+        <p><strong>Currently:</strong> MSc Marketing @ HKU (Sept 2025 – Sept 2026). Open to internships, part-time roles, and graduate opportunities in marketing and finance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Xilin Christine Huang</p>
+  <p>Hong Kong · Made with intention</p>
+</footer>
+
+<script>
+// Mobile menu
+document.getElementById('menuBtn').onclick=()=>document.getElementById('mobileMenu').classList.add('open');
+document.getElementById('closeMenu').onclick=closeMM;
+function closeMM(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// Falling leaves
+const lc=document.getElementById('leaves');
+const lcolors=['#d4845a','#c4855e','#a06898','#7a8fad','#e8c5a8','#c8b8d8','#8b6fa8'];
+for(let i=0;i<22;i++){
+  const l=document.createElement('div');l.className='leaf';
+  l.style.cssText=`left:${Math.random()*100}%;background:${lcolors[Math.floor(Math.random()*lcolors.length)]};width:${4+Math.random()*5}px;height:${10+Math.random()*10}px;border-radius:${Math.random()>.5?'50% 50% 50% 0':'50% 0 50% 50%'};animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;`;
+  lc.appendChild(l);
+}
+
+// Glass bubbles
+const canvas=document.getElementById('bubblesCanvas');
+const expSec=document.querySelector('.experience');
+function resize(){canvas.width=expSec.offsetWidth;canvas.height=expSec.offsetHeight}
+resize();window.addEventListener('resize',resize);
+const ctx=canvas.getContext('2d');
+const bubbles=Array.from({length:14},()=>{
+  const r=40+Math.random()*110;
+  return{x:Math.random()*canvas.width,y:Math.random()*canvas.height,r,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.35,hue:260+Math.random()*40,alpha:0.06+Math.random()*0.1};
+});
+function drawBubbles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  bubbles.forEach(b=>{
+    b.x+=b.vx;b.y+=b.vy;
+    if(b.x<-b.r)b.x=canvas.width+b.r;
+    if(b.x>canvas.width+b.r)b.x=-b.r;
+    if(b.y<-b.r)b.y=canvas.height+b.r;
+    if(b.y>canvas.height+b.r)b.y=-b.r;
+    const fill=ctx.createRadialGradient(b.x,b.y,b.r*.1,b.x,b.y,b.r);
+    fill.addColorStop(0,`hsla(${b.hue},40%,80%,${b.alpha*.6})`);
+    fill.addColorStop(.5,`hsla(${b.hue},35%,70%,${b.alpha*.4})`);
+    fill.addColorStop(1,`hsla(${b.hue},30%,60%,0)`);
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.strokeStyle=`hsla(${b.hue},45%,75%,${b.alpha*1.8})`;ctx.lineWidth=1;ctx.stroke();
+    const gx=b.x-b.r*.35,gy=b.y-b.r*.35;
+    const gloss=ctx.createRadialGradient(gx,gy,0,gx,gy,b.r*.55);
+    gloss.addColorStop(0,`rgba(255,255,255,${b.alpha*1.4})`);
+    gloss.addColorStop(.5,`rgba(255,255,255,${b.alpha*.4})`);
+    gloss.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=gloss;ctx.fill();
+    const gx2=b.x+b.r*.45,gy2=b.y+b.r*.45;
+    const gloss2=ctx.createRadialGradient(gx2,gy2,0,gx2,gy2,b.r*.25);
+    gloss2.addColorStop(0,`rgba(255,255,255,${b.alpha*.8})`);
+    gloss2.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=gloss2;ctx.fill();
+  });
+  requestAnimationFrame(drawBubbles);
+}
+drawBubbles();
+</script>
+</body>
+</html>
